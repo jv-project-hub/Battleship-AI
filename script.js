@@ -14,8 +14,8 @@ const SHIP_IMAGES = {
 let soundEnabled = true;
 
 // Preload audio files for better performance
-const hitSound = new Audio("sounds/explosion.mp3");
-const missSound = new Audio("sounds/splash.mp3");
+const hitSound = new Audio("sounds/explosion.wav");
+const missSound = new Audio("sounds/splash.wav");
 
 function playHitSound() {
   if (!soundEnabled) return;
