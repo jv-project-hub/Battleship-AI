@@ -154,10 +154,10 @@ function updateFleetVisibility() {
   if (!fleetsEl || !toggleFleetBtn) return;
   if (fleetsVisible) {
     fleetsEl.classList.remove("hidden");
-    toggleFleetBtn.textContent = "Hide Fleets";
+    toggleFleetBtn.textContent = "Fleet Info: ON";
   } else {
     fleetsEl.classList.add("hidden");
-    toggleFleetBtn.textContent = "Show Fleets";
+    toggleFleetBtn.textContent = "Fleet Info: OFF";
   }
 }
 
@@ -326,7 +326,7 @@ function initGame() {
   playerShips = [];
   aiShips = [];
 
-  orientationBtn.textContent = "Orientation: Horizontal";
+  orientationBtn.textContent = "Ship Orientation: Horizontal";
   orientationBtn.disabled = false;
   startBtn.textContent = "Start Game";
 
@@ -727,9 +727,9 @@ function checkAllShipsSunk(shipsArray) {
 
 orientationBtn.addEventListener("click", () => {
   horizontal = !horizontal;
-  orientationBtn.textContent = horizontal
-    ? "Orientation: Horizontal"
-    : "Orientation: Vertical";
+    orientationBtn.textContent = horizontal
+      ? "Ship Orientation: Horizontal"
+      : "Ship Orientation: Vertical";
 });
 
 startBtn.addEventListener("click", startGame);
