@@ -517,6 +517,7 @@ function aiFire() {
   if (gameOver) return;
 
   let r, c, tile;
+  let usedHuntTarget = false;
 
   if (difficulty === "easy") {
     while (true) {
@@ -536,23 +537,22 @@ function aiFire() {
     }
   } else if (difficulty === "hard") {
     if (aiHuntMode && aiHuntTargets.length > 0) {
-      let foundValidTarget = false;
-      while (aiHuntTargets.length > 0 && !foundValidTarget) {
+      while (aiHuntTargets.length > 0 && !usedHuntTarget) {
         const target = aiHuntTargets.shift();
         r = target.r;
         c = target.c;
         tile = playerBoard[r][c];
         if (!tile.hit) {
-          foundValidTarget = true;
+          usedHuntTarget = true;
           removeFromAvailableShots(r, c);
         }
       }
-      if (!foundValidTarget) {
+      if (!usedHuntTarget) {
         aiHuntMode = false;
       }
     }
 
-    if (!aiHuntMode || aiHuntTargets.length === 0) {
+    if (!usedHuntTarget) {
       while (true) {
         if (aiAvailableShots.length === 0) {
           gameOver = true;
