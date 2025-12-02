@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battleship</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <h1>Battleship</h1>
+
+    <div class="controls">
+      <button id="start-btn">Start Game</button>
+      <button id="orientation-btn">Orientation: Horizontal</button>
+      <button id="toggle-fleet-btn">Hide Fleets</button>
+      <span id="status">Place your ships by clicking on your board.</span>
+    </div>
+
+    <div class="stats">
+      <div>
+        <strong>Your ships left:</strong> <span id="player-ships-left">0</span>
+      </div>
+      <div>
+        <strong>Enemy ships left:</strong> <span id="ai-ships-left">0</span>
+      </div>
+      <div>
+        <strong>Your shots:</strong> <span id="player-shots">0</span>
+      </div>
+      <div>
+        <strong>Enemy shots:</strong> <span id="ai-shots">0</span>
+      </div>
+    </div>
+
+    <div class="fleets">
+      <div class="fleet-panel">
+        <h3>Your Fleet</h3>
+        <div id="player-fleet"></div>
+      </div>
+      <div class="fleet-panel">
+        <h3>Enemy Fleet</h3>
+        <div id="ai-fleet"></div>
+      </div>
+    </div>
+
+    <div class="boards">
+      <div class="board-wrapper">
+        <h2>Your Fleet (click to place ships)</h2>
+        <div class="board-container">
+          <div class="row-labels">
+            <span>A</span>
+            <span>B</span>
+            <span>C</span>
+            <span>D</span>
+            <span>E</span>
+            <span>F</span>
+            <span>G</span>
+            <span>H</span>
+            <span>I</span>
+            <span>J</span>
+          </div>
+          <div class="col-labels">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>10</span>
+          </div>
+          <div class="player-board-wrapper">
+            <div id="player-board" class="board"></div>
+          </div>
+        </div>
+      </div>
+      <div class="board-wrapper">
+        <h2>Enemy Waters</h2>
+        <div class="board-container">
+          <div class="row-labels">
+            <span>A</span>
+            <span>B</span>
+            <span>C</span>
+            <span>D</span>
+            <span>E</span>
+            <span>F</span>
+            <span>G</span>
+            <span>H</span>
+            <span>I</span>
+            <span>J</span>
+          </div>
+          <div class="col-labels">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>10</span>
+          </div>
+          <div class="ai-board-wrapper">
+            <div id="ai-board" class="board"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span class="cell legend water"></span> Water
+      <span class="cell legend ship"></span> Your Ship
+      <span class="cell legend hit"></span> Hit
+      <span class="cell legend miss"></span> Miss
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
