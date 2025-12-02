@@ -10,6 +10,33 @@ const SHIP_IMAGES = {
   Destroyer: "images/destroyer_top",
 };
 
+// Sound effects state
+let soundEnabled = true;
+
+// Preload audio files for better performance
+const hitSound = new Audio("sounds/explosion.mp3");
+const missSound = new Audio("sounds/splash.mp3");
+
+function playHitSound() {
+  if (!soundEnabled) return;
+  hitSound.currentTime = 0;
+  hitSound.play().catch(() => {});
+}
+
+function playMissSound() {
+  if (!soundEnabled) return;
+  missSound.currentTime = 0;
+  missSound.play().catch(() => {});
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  const soundBtn = document.getElementById("sound-btn");
+  if (soundBtn) {
+    soundBtn.textContent = soundEnabled ? "Sound: ON" : "Sound: OFF";
+  }
+}
+
 const playerBoardEl = document.getElementById("player-board");
 const aiBoardEl = document.getElementById("ai-board");
 const statusEl = document.getElementById("status");
@@ -465,8 +492,10 @@ function onPlayerFire(e) {
     }
     cell.classList.remove("water");
     cell.classList.add("hit");
+    playHitSound();
   } else {
     cell.classList.add("miss");
+    playMissSound();
   }
 
   updateShipsLeft(aiShips, aiShipsLeftEl);
@@ -660,9 +689,11 @@ function aiFire() {
     }
     playerCell.classList.remove("water", "ship");
     playerCell.classList.add("hit");
+    playHitSound();
   } else {
     playerCell.classList.remove("water");
     playerCell.classList.add("miss");
+    playMissSound();
   }
 
   updateShipsLeft(playerShips, playerShipsLeftEl);
@@ -701,6 +732,9 @@ if (toggleFleetBtn) {
   });
 }
 
+const soundBtn = document.getElementById("sound-btn");
+if (soundBtn) {
+  soundBtn.addEventListener("click", toggleSound);
 if (difficultyEl) {
   difficultyEl.addEventListener("change", () => {
     difficulty = difficultyEl.value;
