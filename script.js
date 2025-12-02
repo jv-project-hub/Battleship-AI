@@ -12,53 +12,21 @@ const SHIP_IMAGES = {
 
 // Sound effects state
 let soundEnabled = true;
-let audioContext = null;
 
-function getAudioContext() {
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  }
-  return audioContext;
-}
+// Preload audio files for better performance
+const hitSound = new Audio("sounds/explosion.wav");
+const missSound = new Audio("sounds/splash.wav");
 
 function playHitSound() {
   if (!soundEnabled) return;
-  const ctx = getAudioContext();
-  const oscillator = ctx.createOscillator();
-  const gainNode = ctx.createGain();
-  
-  oscillator.connect(gainNode);
-  gainNode.connect(ctx.destination);
-  
-  oscillator.type = "sawtooth";
-  oscillator.frequency.setValueAtTime(150, ctx.currentTime);
-  oscillator.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.3);
-  
-  gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-  
-  oscillator.start(ctx.currentTime);
-  oscillator.stop(ctx.currentTime + 0.3);
+  hitSound.currentTime = 0;
+  hitSound.play().catch(() => {});
 }
 
 function playMissSound() {
   if (!soundEnabled) return;
-  const ctx = getAudioContext();
-  const oscillator = ctx.createOscillator();
-  const gainNode = ctx.createGain();
-  
-  oscillator.connect(gainNode);
-  gainNode.connect(ctx.destination);
-  
-  oscillator.type = "sine";
-  oscillator.frequency.setValueAtTime(400, ctx.currentTime);
-  oscillator.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.15);
-  
-  gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
-  
-  oscillator.start(ctx.currentTime);
-  oscillator.stop(ctx.currentTime + 0.15);
+  missSound.currentTime = 0;
+  missSound.play().catch(() => {});
 }
 
 function toggleSound() {
