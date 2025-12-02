@@ -10,6 +10,65 @@ const SHIP_IMAGES = {
   Destroyer: "images/destroyer_top",
 };
 
+// Sound effects state
+let soundEnabled = true;
+let audioContext = null;
+
+function getAudioContext() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  return audioContext;
+}
+
+function playHitSound() {
+  if (!soundEnabled) return;
+  const ctx = getAudioContext();
+  const oscillator = ctx.createOscillator();
+  const gainNode = ctx.createGain();
+  
+  oscillator.connect(gainNode);
+  gainNode.connect(ctx.destination);
+  
+  oscillator.type = "sawtooth";
+  oscillator.frequency.setValueAtTime(150, ctx.currentTime);
+  oscillator.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.3);
+  
+  gainNode.gain.setValueAtTime(0.3, ctx.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+  
+  oscillator.start(ctx.currentTime);
+  oscillator.stop(ctx.currentTime + 0.3);
+}
+
+function playMissSound() {
+  if (!soundEnabled) return;
+  const ctx = getAudioContext();
+  const oscillator = ctx.createOscillator();
+  const gainNode = ctx.createGain();
+  
+  oscillator.connect(gainNode);
+  gainNode.connect(ctx.destination);
+  
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(400, ctx.currentTime);
+  oscillator.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.15);
+  
+  gainNode.gain.setValueAtTime(0.2, ctx.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+  
+  oscillator.start(ctx.currentTime);
+  oscillator.stop(ctx.currentTime + 0.15);
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  const soundBtn = document.getElementById("sound-btn");
+  if (soundBtn) {
+    soundBtn.textContent = soundEnabled ? "Sound: ON" : "Sound: OFF";
+  }
+}
+
 const playerBoardEl = document.getElementById("player-board");
 const aiBoardEl = document.getElementById("ai-board");
 const statusEl = document.getElementById("status");
@@ -444,8 +503,10 @@ function onPlayerFire(e) {
     }
     cell.classList.remove("water");
     cell.classList.add("hit");
+    playHitSound();
   } else {
     cell.classList.add("miss");
+    playMissSound();
   }
 
   updateShipsLeft(aiShips, aiShipsLeftEl);
@@ -512,9 +573,11 @@ function aiFire() {
     }
     playerCell.classList.remove("water", "ship");
     playerCell.classList.add("hit");
+    playHitSound();
   } else {
     playerCell.classList.remove("water");
     playerCell.classList.add("miss");
+    playMissSound();
   }
 
   updateShipsLeft(playerShips, playerShipsLeftEl);
@@ -551,6 +614,11 @@ if (toggleFleetBtn) {
     fleetsVisible = !fleetsVisible;
     updateFleetVisibility();
   });
+}
+
+const soundBtn = document.getElementById("sound-btn");
+if (soundBtn) {
+  soundBtn.addEventListener("click", toggleSound);
 }
 
 initGame();
