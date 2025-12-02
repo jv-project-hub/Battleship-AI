@@ -50,22 +50,15 @@ const logoEasterEggBtn = document.querySelector(".logo-easter-egg");
 const easterEggModal = document.getElementById("easter-egg-modal");
 const easterEggCloseBtn = document.querySelector(".easter-egg-close");
 const easterEggBackdrop = document.querySelector(".easter-egg-backdrop");
-const easterEggIframe = document.getElementById("easter-egg-iframe");
-
-const EASTER_EGG_VIDEO_URL = "https://www.youtube.com/embed/IRwUkRDr1s0";
 
 function openEasterEgg() {
-  if (!easterEggModal || !easterEggIframe) return;
-  easterEggIframe.src = EASTER_EGG_VIDEO_URL;
+  if (!easterEggModal) return;
   easterEggModal.classList.remove("hidden");
 }
 
 function closeEasterEgg() {
   if (!easterEggModal) return;
   easterEggModal.classList.add("hidden");
-  if (easterEggIframe) {
-    easterEggIframe.src = "";
-  }
 }
 
 if (logoEasterEggBtn) {
