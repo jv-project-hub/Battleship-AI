@@ -51,6 +51,23 @@ h1 {
   font-size: 0.95rem;
 }
 
+.game-options {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border: 1px solid #1f8ef1;
+  border-radius: 6px;
+  background: rgba(31, 142, 241, 0.1);
+}
+
+.game-options-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1f8ef1;
+  margin-right: 4px;
+}
+
 .difficulty-selector {
   display: flex;
   align-items: center;
