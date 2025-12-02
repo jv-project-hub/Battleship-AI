@@ -25,6 +25,11 @@ h1 {
   margin-bottom: 16px;
 }
 
+.logo {
+  max-width: 300px;
+  height: auto;
+}
+
 .controls {
   display: flex;
   align-items: center;
