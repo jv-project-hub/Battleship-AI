@@ -64,15 +64,12 @@ function closeEasterEgg() {
 // Game Result Modal elements
 const resultModal = document.getElementById("result-modal");
 const resultGif = document.getElementById("result-gif");
-const resultTitle = document.getElementById("result-title");
 
 function openResultModal(didWin) {
-  if (!resultModal || !resultGif || !resultTitle) return;
+  if (!resultModal || !resultGif) return;
   if (didWin) {
-    resultTitle.textContent = "You Win!";
     resultGif.src = "images/Winner.gif";
   } else {
-    resultTitle.textContent = "You Lose!";
     resultGif.src = "images/Loser.gif";
   }
   resultModal.classList.remove("hidden");

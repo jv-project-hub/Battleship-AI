@@ -119,12 +119,6 @@ h1 {
   text-align: center;
 }
 
-.result-title {
-  margin-bottom: 12px;
-  font-size: 1.5rem;
-  color: #f5f7fa;
-}
-
 .controls {
   display: flex;
   align-items: center;
